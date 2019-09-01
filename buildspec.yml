@@ -25,4 +25,4 @@ phases:
 
 cache:
   paths:
-    $SONAR_HOME/**/*
+    - '/opt/sonar-scanner/**/*'
