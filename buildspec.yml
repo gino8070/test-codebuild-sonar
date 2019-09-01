@@ -1,14 +1,27 @@
 version: 0.2
 
+env:
+  variables:
+    SONAR_VER: sonar-scanner-cli-4.0.0.1744-linux
+    SONAR_HOME:/opt/sonar-scanner
+    PATH: $PATH:$SONAR_HOME/bin
+
 phases:
   install:
     runtime-versions:
       nodejs: 10
     commands:
       - echo Install started on `date`
+      - apt-get install --no-install-recommends -y wget unzip
+      - cd /tmp
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/${SONAR_VER}.zip
+      - unzip ${SONAR_VER}.zip && rm ${SONAR_VER}.zip
+      - mv ${SONAR_VER}/ $SONAR_HOME
   build:
     commands:
       - echo Build started on `date`
-  post_build:
-    commands:
-      - echo Build completed on `date`
+      - sonar-scanner -h
+
+cache:
+  paths:
+    $SONAR_HOME
