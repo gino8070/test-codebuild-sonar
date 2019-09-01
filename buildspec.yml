@@ -16,7 +16,7 @@ phases:
       - cd /tmp
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/${SONAR_VER}.zip
       - unzip ${SONAR_VER}.zip && rm ${SONAR_VER}.zip
-      - mv ${SONAR_VER}/ $SONAR_HOME
+      - mv sonar-scanner-*-linux $SONAR_HOME
   build:
     commands:
       - echo Build started on `date`
